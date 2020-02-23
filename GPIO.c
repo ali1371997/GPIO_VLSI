@@ -100,6 +100,32 @@ void GPIOPadSet(gpio_port_t port, uint8 pins, gpio_drive_t str, gpio_pad_t pad)
 }
 
 
+
+
+
+uint8 GPIOPadDrive2_mAGet(gpio_port_t port, uint8 pins)
+{
+    uint8 data = (*((volatile uint32 *) (port + Drive_2mA)));
+    data &= pins;
+    return data;
+}
+
+
+uint8 GPIOPadDrive4_mAGet(gpio_port_t port, uint8 pins){
+    uint8 data = (*((volatile uint32 *) (port + Drive_4mA)));
+    data &= pins;
+    return data;
+
+}
+
+
+uint8 GPIOPadDrive8_mAGet(gpio_port_t port, uint8 pins){
+    uint8 data = (*((volatile uint32 *) (port + Drive_8mA)));
+    data &= pins;
+    return data;
+
+}
+
 uint8 GPIOPadOpenDrainGet(gpio_port_t port, uint8 pins)
 {
       uint8   data = (*((volatile uint32 *) (port + GPIOODR)));
