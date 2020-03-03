@@ -29,10 +29,11 @@ typedef enum {APB=0,AHB=1} gpio_bus_t;
 typedef enum {Drive_2mA=0x500, Drive_4mA=0x504, Drive_8mA=0x508, Drive_8mA_Selw=0x508} gpio_drive_t;
 typedef enum {Pad_PU=0x510,Pad_PD=0x514,PAD_NPU_NPD,PAD_OD=0x50C} gpio_pad_t;
 
+typedef enum {LowLevel, HighLevel, RisingEdge,     FallingEdge,BothEdges} GPIO_InterruptMode_t;
 
 //Functions prototype
 
-void GPIOBusSet(gpio_port_CTL_t port,gpio_bus_t bus);
+void GPIOBusSet(gpio_port_CTL_t port, gpio_bus_t bus);
 gpio_bus_t GPIOBusGet(gpio_port_CTL_t port);
 
 
@@ -57,6 +58,9 @@ uint8 GPIOPadPullDownGet(gpio_port_t port, uint8 pins);
 uint8 GPIORead(gpio_port_t port, uint8 pins);
 void GPIOWrite(gpio_port_t port, uint8 pins, uint8 data);
 
-
+void GPIOInterruptModeSet(gpio_port_t port, uint8 pins, GPIO_InterruptMode_t mode);
+void GPIOInterruptEnable(gpio_port_t port, uint8 pins);
+void GPIOInterruptDisable(gpio_port_t port, uint8 pins);
+void GPIOInterruptClearFlag(gpio_port_t port, uint8 pins);
 
 #endif /* GPIO_H_ */

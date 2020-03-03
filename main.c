@@ -1,9 +1,12 @@
 /**
  * main.c
  */
-#include"RegMap.h"
 #include"STD_TYPES.h"
-#include"GPIO.h"
+#include "Utils.h"
+#include "GPIO.h"
+#include "Interrupt.h"
+
+void IntPortF(void);
 
 void _delay_ms(uint32 n)
 {
@@ -16,21 +19,32 @@ void _delay_ms(uint32 n)
 
 int main(void)
 {
-    gpio_bus_t bus;
-
     GPIOBusSet(PORTF, AHB);
     GPIOClockSet(PORTF);
-    GPIODirModeSet(PORTF_AHB, 0b00001110, MODE_OUT);
-    bus = GPIOBusGet(PORTF);
+    GPIODirModeSet(PORTF_AHB, 0b00000010, MODE_OUT);
+    GPIODirModeSet(PORTF_AHB, 0b00010000, MODE_IN);
+    GPIOPadSet(PORTF_AHB, 0b00010000, Drive_4mA, Pad_PU);
+    GPIOInterruptModeSet(PORTF_AHB, 0b00010000, FallingEdge);
+    GPIOInterruptEnable(PORTF_AHB, 0b00010000);
+    GPIOInterruptClearFlag(PORTF_AHB, 0b00010000);
+
+    ISRPtr(IntPortF);
+    IntSetPriority(GPIOPortF, 7);
+    IntEnable(GPIOPortF);
+
     while (1)
     {
-        GPIOWrite(PORTF_AHB, 0b00001110, 0b00000010);
-        _delay_ms(1000);
-        GPIOWrite(PORTF_AHB, 0b00001110, 0b00000100);
-        _delay_ms(1000);
-        GPIOWrite(PORTF_AHB, 0b00001110, 0b00001000);
-        _delay_ms(1000);
+        GPIOWrite(PORTF_AHB, 0b00000010, 0xff);
 
     }
+
     return 0;
+}
+
+void IntPortF(void)
+{
+    GPIOWrite(PORTF_AHB, 0b00000010, 0x00);
+    _delay_ms(1000);
+    GPIOInterruptClearFlag(PORTF_AHB, 0b00010000);
+
 }

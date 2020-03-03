@@ -1,0 +1,4 @@
+Interrupt.obj: ../Interrupt.c
+Interrupt.obj: ..\STD_TYPES.h
+Interrupt.obj: ..\RegMap.h
+Interrupt.obj: ..\Interrupt.h
