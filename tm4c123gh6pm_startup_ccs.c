@@ -128,6 +128,12 @@ extern void ISR_WTimer4_B(void);// Wide Timer 4 subtimer B
 extern void ISR_WTimer5_A(void);// Wide Timer 5 subtimer A
 extern void ISR_WTimer5_B(void);// Wide Timer 5 subtimer B
 extern void ISR_FPU(void);// FPU
+<<<<<<< HEAD
+=======
+extern void ISR_I2C4(void);// I2C4 Master and Slave
+extern void ISR_I2C5(void);// I2C5 Master and Slave
+extern void ISR_QuadEncoder2(void);// Quadrature Encoder 2
+>>>>>>> d94e85c2835faaeebe95b65037654a1172809265
 extern void ISR_PWM1Generator0(void);// PWM 1 Generator 0
 extern void ISR_PWM1Generator1(void);// PWM 1 Generator 1
 extern void ISR_PWM1Generator2(void);// PWM 1 Generator 2
@@ -272,11 +278,19 @@ void (* const g_pfnVectors[])(void) =
     ISR_FPU,                      // FPU
     0,                                      // Reserved
     0,                                      // Reserved
+<<<<<<< HEAD
     IntDefaultHandler,                      // I2C4 Master and Slave
     IntDefaultHandler,                      // I2C5 Master and Slave
     IntDefaultHandler,                      // GPIO Port M
     IntDefaultHandler,                      // GPIO Port N
     IntDefaultHandler,                      // Quadrature Encoder 2
+=======
+    ISR_I2C4,                      // I2C4 Master and Slave
+    ISR_I2C5,                      // I2C5 Master and Slave
+    IntDefaultHandler,                      // GPIO Port M
+    IntDefaultHandler,                      // GPIO Port N
+    ISR_QuadEncoder2,                      // Quadrature Encoder 2
+>>>>>>> d94e85c2835faaeebe95b65037654a1172809265
     0,                                      // Reserved
     0,                                      // Reserved
     IntDefaultHandler,                      // GPIO Port P (Summary or P0)
