@@ -2,7 +2,6 @@
  * main.c
  */
 #include"STD_TYPES.h"
-#include "Utils.h"
 #include "GPIO.h"
 #include "Interrupt.h"
 
@@ -28,10 +27,10 @@ int main(void)
     GPIOInterruptEnable(PORTF_AHB, 0b00010000);
     GPIOInterruptClearFlag(PORTF_AHB, 0b00010000);
 
-    ISRPtr(IntPortF);
     IntSetPriority(GPIOPortF, 7);
-    IntEnable(GPIOPortF);
 
+    IntRegister(IntPortF, GPIOPortF);
+    IntEnable(GPIOPortF);
     while (1)
     {
         GPIOWrite(PORTF_AHB, 0b00000010, 0xff);

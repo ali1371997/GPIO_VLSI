@@ -43,11 +43,11 @@
 #define     GPIOPDR         0x514
 #define     GPIOSLR         0x518
 #define     GPIODEN         0x51C
-#define     GPIOIS         0x404
+#define     GPIOIS          0x404
 #define     GPIOIBE         0x408
 #define     GPIOIEV         0x40C
 #define     GPIOIM          0x410
-#define     GPIOICR          0x41C
+#define     GPIOICR         0x41C
 
 /*Interrupts*/
 #define Int_EN 0xE000E100
@@ -57,5 +57,7 @@
 #define Int_UNPEND 0xE000E280
 #define Int_ACTIVE 0xE000E300
 #define Int_PRI 0xE000E400
+#define Int_VTable 0xE000ED08
+
 
 #endif /* REGMAP_H_ */
